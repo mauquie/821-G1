@@ -13,31 +13,34 @@
   				<span class="navbar-toggler-icon"></span>
  			 </button>
         
-        	  <div class="collapse navbar-collapse" id="navbarColor03">
-         	  	 <ul class="navbar-nav mr-auto">
-             	 <li class="nav-item active">
-              	 	 <a class="nav-link" href="/">Accueil</a>
-            	 </li>
-            	  <li class="nav-item">
+        	<div class="collapse navbar-collapse" id="navbarColor03">
+         		<ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              	<a class="nav-link" href="/">Accueil</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="/equipement">Equipement</a>
-              </li>
-              <li class="nav-item">
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="/emprunt">Emprunt</a>
-              </li>
-              <li class="nav-item">
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="/lieu">Lieu</a>
-              </li>
-              <li class="nav-item">
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="/contact">Contact</a>
-              {% if not app.user %}
-              <li class="nav-item">
-                <a class="nav-link" href="{{ path('security_login') }}">Connexion</a>
-              </li>
-              {% else %}
-              <li class="nav-item">
-                <a class="nav-link" href="{{ path('security_logout') }}">Deconnexion</a>
-              </li>
-              {% endif %}
+            {% if not app.user %}
+                <li class="nav-item">
+        			<a class="nav-link" href="{{ path('security_registration') }}">Inscription</a>
+    			</li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ path('security_login') }}">Connexion</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ path('security_logout') }}">Déconnexion</a>
+                </li>
+            {% endif %}
             </ul>
           </div>
         </nav>

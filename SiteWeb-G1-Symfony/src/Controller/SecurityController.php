@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\UserType;
+use App\Form\RegistrationType;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,12 +14,12 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/inscription", name="user_registration")
+     * @Route("/inscription", name="security_registration")
      */
     public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $passwordEncoder)
     {
         $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(RegistrationType::class, $user);
         
         $form->handleRequest($request); //analyse la request
         
@@ -36,7 +36,7 @@ class SecurityController extends AbstractController
             
             return $this->redirectToRoute('security_login');
         }
-        return $this->render('security/register.html.twig', array('form' => $form->createView()));
+        return $this->render('security/registration.html.twig', array('form' => $form->createView()));
     }
     
     /**
