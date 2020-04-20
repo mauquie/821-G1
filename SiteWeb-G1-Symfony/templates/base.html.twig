@@ -13,40 +13,83 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
- 	<a class="navbar-brand" href="#">Bourdelle</a>
+ 	<a class="navbar-brand" href="/">Bourdelle</a>
   	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     	<span class="navbar-toggler-icon"></span>
- 	 </button>
+ 	</button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/">Accueil<span class="sr-only">(current)</span></a>
-      </li>
-     <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Materiel
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/equipement">Equipement</a>
-          <a class="dropdown-item" href="/emprunt">Emprunt</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="/lieu">Lieu</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="/contact">Contact</a>
-      </li>
-        {% if not app.user %}
+ 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+   		 <ul class="navbar-nav mr-auto">
+     	 {% if app.request.attributes.get('_route') is same as ('home') %}        
+   			 <li class="nav-item active">
+       			 <a class="nav-link" href="/">Accueil</a>
+   			 </li>
+         {% else  %}
+   			 <li class="nav-item ">
+       			 <a class="nav-link" href="/">Accueil</a>
+   			 </li>
+         {% endif %}
+         
+         {% if app.request.attributes.get('_route') is same as ('equipment') or ('borrow') %} 
+    	 <li class="nav-item dropdown">
+       		 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Materiel</a>
+       		 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+         		 <a class="dropdown-item" href="/equipement">Equipement</a>
+         		 <a class="dropdown-item" href="/emprunt">Emprunt</a>
+         	 </div>
+     	 </li>
+     	 {% else  %}
+     	 <li class="nav-item dropdown ">
+       		 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Materiel</a>
+       		 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+         		 <a class="dropdown-item" href="/equipement">Equipement</a>
+         		 <a class="dropdown-item" href="/emprunt">Emprunt</a>
+         	 </div>
+     	 </li>
+     	 {% endif %}
+     	 {% if app.request.attributes.get('_route') is same as ('place') %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="/lieu">Lieu</a>
+                </li>
+            {% else  %}
                 <li class="nav-item">
-        			<a class="nav-link" href="{{ path('security_registration') }}">Inscription</a>
-    			</li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{{ path('security_login') }}">Connexion</a>
+                    <a class="nav-link" href="/lieu">Lieu</a>
+                </li>
+            {% endif %}
+            
+            {% if app.request.attributes.get('_route') is same as ('contact') %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="/contact">Contact</a>
                 </li>
             {% else %}
                 <li class="nav-item">
-                  <a class="nav-link" href="{{ path('security_logout') }}">Déconnexion</a>
+                    <a class="nav-link" href="/contact">Contact</a>
+                </li>
+            {% endif %}
+            
+            {% if not app.user %}
+                {% if app.request.attributes.get('_route') is same as ('security_registration') %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/inscription">Inscription</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/inscription">Inscription</a>
+                    </li>
+                {% endif %}
+                
+                {% if app.request.attributes.get('_route') is same as ('security_login') %}    
+                    <li class="nav-item active">
+                          <a class="nav-link" href="/connexion">Connexion</a>
+                    </li>
+                {% else  %}
+                    <li class="nav-item ">
+                          <a class="nav-link" href="/connexion">Connexion</a>
+                    </li>
+                {% endif %}
+            {% else %}           
+                <li class="nav-item ">
+                      <a class="nav-link" href="/deconnexion">Deconnexion</a>
                 </li>
             {% endif %}
             </ul>
