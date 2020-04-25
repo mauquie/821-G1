@@ -1,0 +1,51 @@
+{% block encoding %}
+	<meta charset="UTF-8">
+{% endblock %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Bourdelle</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    	<span class="navbar-toggler-icon"></span>
+    </button>
+    
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto">
+		    <li class="nav-item">
+				<a class="nav-link {% if current_menu is defined and current_menu == 'active_home' %}active{%  endif %}" href="/">Accueil</a>
+			</li>
+			
+			<li class="nav-item dropdown">
+    			<a class="nav-link {% if current_menu is defined and current_menu == 'active_equipment' or current_menu == 'active_borrow' %}active{%  endif %} dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Emprunter nos équipement</a>
+    			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+    				<a class="dropdown-item" href="/equipement">Nos équipements</a>
+    				<a class="dropdown-item" href="/emprunt">Mes emprunts</a>
+    			</div>
+			</li>
+			
+			<li class="nav-item">
+				<a class="nav-link {% if current_menu is defined and current_menu == 'active_place' %}active{%  endif %}" href="/lieu">Lieu</a>
+			</li>
+			
+			<li class="nav-item">
+            	<a class="nav-link {% if current_menu is defined and current_menu == 'active_contact' %}active{%  endif %}" href="/contact">Contact</a>
+        	</li>
+			
+			{% if not app.user %} 	
+				<li class="nav-item">
+					<a class="nav-link {% if current_menu is defined and current_menu == 'active_registration' %}active{%  endif %}" href="/inscription">Inscription</a>
+				</li> 
+				
+            	<li class="nav-item">
+               		<a class="nav-link {% if current_menu is defined and current_menu == 'active_login' %}active{% endif %}" href="/connexion">Connexion</a>
+                </li>
+
+            {% else %} 
+				<li class="nav-item">
+					<a class="nav-link" href="/deconnexion">Déconnexion</a>
+ 				</li>
+            {% endif %}
+			
+			
+		</ul>
+	</div>
+</nav>

@@ -1,112 +1,27 @@
 <!doctype html>
 <html lang="fr">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-    <title>Lycée Bourdelle</title>
-    <link href="{{ asset('css/bootstrap.min.css') }}" type="text/css" rel="stylesheet">
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
- 	<a class="navbar-brand" href="/">Bourdelle</a>
-  	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    	<span class="navbar-toggler-icon"></span>
- 	</button>
-
- 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
-   		 <ul class="navbar-nav mr-auto">
-     	 {% if app.request.attributes.get('_route') is same as ('home') %}        
-   			 <li class="nav-item active">
-       			 <a class="nav-link" href="/">Accueil</a>
-   			 </li>
-         {% else  %}
-   			 <li class="nav-item ">
-       			 <a class="nav-link" href="/">Accueil</a>
-   			 </li>
-         {% endif %}
-         
-         {% if app.request.attributes.get('_route') is same as ('equipment') or ('borrow') %} 
-    	 <li class="nav-item dropdown">
-       		 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Materiel</a>
-       		 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-         		 <a class="dropdown-item" href="/equipement">Equipement</a>
-         		 <a class="dropdown-item" href="/emprunt">Emprunt</a>
-         	 </div>
-     	 </li>
-     	 {% else  %}
-     	 <li class="nav-item dropdown ">
-       		 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Materiel</a>
-       		 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-         		 <a class="dropdown-item" href="/equipement">Equipement</a>
-         		 <a class="dropdown-item" href="/emprunt">Emprunt</a>
-         	 </div>
-     	 </li>
-     	 {% endif %}
-     	 {% if app.request.attributes.get('_route') is same as ('place') %}
-                <li class="nav-item active">
-                    <a class="nav-link" href="/lieu">Lieu</a>
-                </li>
-            {% else  %}
-                <li class="nav-item">
-                    <a class="nav-link" href="/lieu">Lieu</a>
-                </li>
-            {% endif %}
-            
-            {% if app.request.attributes.get('_route') is same as ('contact') %}
-                <li class="nav-item active">
-                    <a class="nav-link" href="/contact">Contact</a>
-                </li>
-            {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="/contact">Contact</a>
-                </li>
-            {% endif %}
-            
-            {% if not app.user %}
-                {% if app.request.attributes.get('_route') is same as ('security_registration') %}
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/inscription">Inscription</a>
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="/inscription">Inscription</a>
-                    </li>
-                {% endif %}
-                
-                {% if app.request.attributes.get('_route') is same as ('security_login') %}    
-                    <li class="nav-item active">
-                          <a class="nav-link" href="/connexion">Connexion</a>
-                    </li>
-                {% else  %}
-                    <li class="nav-item ">
-                          <a class="nav-link" href="/connexion">Connexion</a>
-                    </li>
-                {% endif %}
-            {% else %}           
-                <li class="nav-item ">
-                      <a class="nav-link" href="/deconnexion">Deconnexion</a>
-                </li>
-            {% endif %}
-            </ul>
-          </div>
-        </nav>
+  	<head>
+        <!-- Required meta tags -->
+        {% block encoding %}<meta charset="UTF-8">{% endblock %}
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+        <title>{% block title %}{% endblock %}Lycée Bourdelle</title>
+        <link href="{{ asset('css/bootstrap.min.css') }}" type="text/css" rel="stylesheet">
+  	</head>
+	<body>
+        {% include 'navbar/navbar.html.twig' %}
     	<div class="container">
             {% block body %}{% endblock %}
         </div>
-        {% block javascripts %}{% endblock %}
-    </ul>
-  </div>
-</nav>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-  </body>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  	    {% block javascripts %}{% endblock %}
+	</body>
 </html>

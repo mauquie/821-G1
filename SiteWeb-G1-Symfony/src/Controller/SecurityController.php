@@ -36,7 +36,10 @@ class SecurityController extends AbstractController
             
             return $this->redirectToRoute('security_login');
         }
-        return $this->render('security/registration.html.twig', array('form' => $form->createView()));
+        return $this->render('security/registration.html.twig', [
+            'current_menu' => 'active_registration',
+            'form' => $form->createView()  
+        ]);
     }
     
     /**
@@ -45,7 +48,9 @@ class SecurityController extends AbstractController
     public function login()
     {
  
-       return $this->render('security/login.html.twig');
+        return $this->render('security/login.html.twig', [
+            'current_menu' => 'active_login'       
+        ]);
     }
     
     /**

@@ -12,7 +12,9 @@ class MainController extends AbstractController
      */
     public function accueil()
     {
-        return $this->render('site/accueil.html.twig');
+        return $this->render('site-pages/home.html.twig', [
+            'current_menu' => 'active_home'
+        ]);
     }
     
     /**
@@ -20,7 +22,9 @@ class MainController extends AbstractController
      */
     public function equipement()
     {
-        return $this->render('site/equipement.html.twig');
+        return $this->render('site-pages/equipment.html.twig', [ 
+            'current_menu' => 'active_equipment'
+        ]);
     }
     
     /**
@@ -28,7 +32,9 @@ class MainController extends AbstractController
      */
     public function emprunt()
     {
-        return $this->render('site/emprunt.html.twig');
+        return $this->render('site-pages/borrow.html.twig', [
+            'current_menu' => 'active_borrow'
+        ]);
     }
     
     /**
@@ -36,7 +42,9 @@ class MainController extends AbstractController
      */
     public function lieu()
     {
-        return $this->render('site/lieu.html.twig');
+        return $this->render('site-pages/place.html.twig', [
+            'current_menu' => 'active_place'
+        ]);
     }
     
     /**
@@ -44,6 +52,8 @@ class MainController extends AbstractController
      */
     public function contact()
     {
-        return $this->render('site/contact.html.twig');
+        return $this->render('site-pages/contact.html.twig', [
+            'current_menu' => 'active_contact'
+        ]);
     }
 }
