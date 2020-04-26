@@ -1,8 +1,160 @@
 {% extends 'base.html.twig' %}
 {% block encoding %}<meta charset="UTF-8">{% endblock %}
-{% block title %}Nos équipements - {% endblock %}
+{% block title %}Nos Équipements - {% endblock %}
 {% block body %}
-
-	<h1>Page Equipement</h1>
+		
+	<div class="container">
+    	<h1>Page Equipement</h1>
+      	<br>
+    </div>
+    
+	<table class="table" data-toggle="table" data-search="true" data-pagination="true">
+        <thead>
+			<tr>
+                <th>Produit</th>
+                <th>Nom du produit</th>
+                <th>Temps de disponibilité maximal de location	</th>
+                <th data-sortable="true" data-field="Quantité disponible">Quantité disponible</th>
+                <th>Edition</th>
+			</tr>
+		</thead>
+        <tbody>
+    		<tr>
+                <td><img src="img/equipment/arduinocard.png" alt="Arduino UNO" style="width:100%"></td>
+                <td>Carte Arduino Uno</td>
+                <td>15 jours</td>
+                <td>10</td>
+                <td>
+                	<button type="button" class="btn btn-primary">Modifier</button> 
+            		<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete">Supprimer </button>
+                </td>
+          	</tr>
+          	<tr>
+             	<td><img src="img/equipment/rasperrypi.png" alt="Rasperry PI 3" style="width:100%"></td>
+                <td>Carte Raspberry Pi 3</td>
+                <td>15 jours</td>
+                <td>10</td>
+                <td>
+                	<button type="button" class="btn btn-primary">Modifier</button> 
+                 	<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete">Supprimer</button>
+                </td>
+    		</tr>
+          	<tr>
+    			<td><img src="img/equipment/wipy.png" alt="Wipy" style="width:100%"></td>
+    			<td>Wipy 3.0</td>
+    			<td>15 jours</td>
+    			<td>10</td>
+    			<td>
+    				<button type="button" class="btn btn-primary">Modifier</button> 
+                 	<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete">Supprimer</button>
+    			</td>
+    		</tr>
+    		<tr>
+    			<td><img src="img/equipment/arduinodue.png" alt="Arduino Due" style="width:100%"></td>
+    			<td>Carte Arduino Due</td>
+    			<td>15 jours</td>
+    			<td>10</td>
+    			<td>
+    				<button type="button" class="btn btn-primary">Modifier</button> 
+                 	<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete">Supprimer</button>
+             	</td>
+          	</tr>
+          	<tr>
+             	<td><img src="img/equipment/cablevga.png" alt="Cable VGA" style="width:100%"></td>
+             	<td>Cable VGA</td>
+             	<td>15 jours</td>
+             	<td>10</td>
+             	<td>
+             		<button type="button" class="btn btn-primary">Modifier</button> 
+                 	<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete">Supprimer</button>
+             	</td>
+          	</tr>
+          	<tr>
+             	<td><img src="img/equipment/cableVGAHdmi.png" alt="Cable VGA HDMI" style="width:100%"></td>
+             	<td>Adapdateur VGA-HDMI</td>
+             	<td>15 jours</td>
+             	<td>10</td>
+             	<td>
+             		<button type="button" class="btn btn-primary">Modifier</button> 
+                 	<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete">Supprimer</button>
+             	</td>
+          	</tr>
+          	<tr>
+             	<td><img src="img/equipment/switch.png" alt="Cable Switch" style="width:100%"></td>
+             	<td>Switch</td>
+             	<td>15 jours</td>
+             	<td>5</td>
+             	<td>
+             		<button type="button" class="btn btn-primary">Modifier</button> 
+                 	<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete">Supprimer</button>
+             	</td>
+          	</tr>
+          	<tr>
+             	<td><img src="img/equipment/cableEthernet.png" alt="Cable Ethernet" style="width:100%"></td>
+             	<td>Cable Ethernet</td>
+             	<td>15 jours</td>
+             	<td>8</td>
+             	<td>
+             		<button type="button" class="btn btn-primary">Modifier</button>
+                 	<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete">Supprimer</button>
+             	</td>
+          	</tr>
+          	<tr>
+             	<td><img src="img/equipment/picoscope.png" alt="Picoscope" style="width:100%"></td>
+             	<td>Picoscope</td>
+             	<td>15 jours</td>
+             	<td>6</td>
+             	<td>
+             		<button type="button" class="btn btn-primary">Modifier</button> 
+                 	<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete">Supprimer</button>
+             	</td>
+          	</tr>
+          	<tr>
+             	<td><img src="img/equipment/picoscope.png" alt="Picoscope" style="width:100%"></td>
+             	<td>Picoscope</td>
+             	<td>15 jours</td>
+             	<td>6</td>
+          		<td>	
+          			<button type="button" class="btn btn-primary">Modifier</button> 
+                 	<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete">Supprimer</button>
+              	</td>
+        	</tr>
+          	<tr>
+             	<td><img src="img/equipment/picoscope.png" alt="Picoscope" style="width:100%"></td>
+             	<td>Picoscope</td>
+             	<td>15 jours</td>
+             	<td>6</td>
+             	<td>
+             		<button type="button" class="btn btn-primary">Modifier</button> 
+                 	<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirm-delete">Supprimer</button>
+             	</td>
+    		</tr>
+    	</tbody>
+	</table>
+    
+    
+    {# Popup HTML cachée #}
+    
+	<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">Confirmation de suppression</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+            
+                <div class="modal-body">
+                    <p>Vous allez supprimer cette ligne, cette procédure est irréversible.</p>
+                    <p>Êtes-vous sûr de vouloir la supprimer ?</p>
+                    <p class="debug-url"></p>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-danger"><a>Supprimer</a></button>
+                </div>
+            </div>
+        </div>
+	</div>
 
 {% endblock %}

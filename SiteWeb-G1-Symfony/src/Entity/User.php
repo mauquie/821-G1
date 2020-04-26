@@ -23,7 +23,7 @@ class User implements UserInterface
     
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Length(max=100,maxMessage="Entrer un pseudo d'au moins 100 caracteres")
+     * @Assert\Length(max=100, maxMessage="Entrer un pseudo d'au moins {{ limit }} caracteres")
      * @Assert\NotBlank()
      * @Assert\Email()
      */
@@ -31,7 +31,7 @@ class User implements UserInterface
     
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Length(max=100,maxMessage="Entrer un pseudo d'au moins 100 caracteres")
+     * @Assert\Length(max=100, maxMessage="Entrer un pseudo d'au moins {{ limit }} caracteres")
      * @Assert\NotBlank()
      */
     private $username;
@@ -39,45 +39,48 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
-     * @Assert\Length(min=6,minMessage="Votre mot de passe doit contenir au moins 6 caracteres")
+     * @Assert\Length(min=6, minMessage="Votre mot de passe doit contenir au moins {{ limit }} caracteres")
      */
     private $password;
     
-    private $roles;
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
     
     public function getId(): ?int
     {
         return $this->id;
     }
     
-    public function getEmail(): ?string
+    public function getEmail()
     {
         return $this->email;
     }
     
     public function setEmail(string $email)
     {
-        $this->email = $email;  
+        $this->email = $email;
     }
     
-    public function getUsername(): ?string
+    public function getUsername()
     {
         return $this->username;
     }
     
     public function setUsername(string $username)
-    {   
+    {
         $this->username = $username;
     }
     
-    public function getPassword(): ?string
+    public function getPassword()
     {
         return $this->password;
     }
     
     public function setPassword(string $password)
     {
-        $this->password = $password;   
+        $this->password = $password;
     }
     
     public function getRoles(): array
@@ -99,7 +102,7 @@ class User implements UserInterface
         return null;
     }
     
-
+    
     
     public function eraseCredentials()
     {

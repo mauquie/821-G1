@@ -5,10 +5,10 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegistrationType;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class SecurityController extends AbstractController
@@ -45,12 +45,19 @@ class SecurityController extends AbstractController
     /**
      * @Route("/connexion", name="security_login")
      */
-    public function login()
+    public function login(AuthenticationUtils $authenticationUtils)
     {
- 
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+        
         return $this->render('security/login.html.twig', [
-            'current_menu' => 'active_login'       
+            'current_menu' => 'active_login',
+            'last_username' => $lastUsername,
+            'error' => $error
         ]);
+        
     }
     
     /**

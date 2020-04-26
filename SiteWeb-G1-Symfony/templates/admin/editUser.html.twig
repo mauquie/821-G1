@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% block encoding %}<meta charset="UTF-8">{% endblock %}
+{% block title %}Modifier Utilisateur - {% endblock %}
+{% block body %}
+
+	<h1>Modifier les droits d'un Utilisateur</h1>
+	<br/>
+	
+    {{ form_start(formUser) }}
+    {{ form_widget(formUser) }}
+     <button type="submit" class="btn btn-success">Modifier</button>
+    {{ form_end(formUser) }}
+
+{% endblock %}
