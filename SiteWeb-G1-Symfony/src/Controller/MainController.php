@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class MainController extends AbstractController
 {
@@ -28,7 +30,19 @@ class MainController extends AbstractController
     }
     
     /**
+     * @Route("/gerer-equipement", name="manage_equipment")
+     * @Security("is_granted('ROLE_EDITOR')")
+     */
+    public function manage_equipement()
+    {
+        return $this->render('editor/manageEquipment.html.twig', [
+            'current_menu' => 'active_manage_equipment'
+        ]);
+    }
+    
+    /**
      * @Route("/emprunt", name="borrow")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function emprunt()
     {

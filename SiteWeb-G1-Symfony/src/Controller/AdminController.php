@@ -8,11 +8,13 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
 
 /**
  * @Route("/admin", name="admin_")
+ * @Security("is_granted('ROLE_ADMIN')")
  */
 class AdminController extends AbstractController
 {
@@ -29,6 +31,7 @@ class AdminController extends AbstractController
     
     /**
      * @Route("/utilisateurs/modifier/{id}", name="set_users")
+     * 
      */
     public function editUser(Request $request, User $user, EntityManagerInterface $entity_manager) 
     {

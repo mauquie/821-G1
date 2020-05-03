@@ -13,10 +13,27 @@
 			</li>
 			
 			<li class="nav-item dropdown">
-    			<a class="nav-link {% if current_menu is defined and current_menu == 'active_equipment' or current_menu == 'active_borrow' %}active{%  endif %} dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Emprunter nos équipement</a>
+    			<a class="nav-link {% if current_menu is defined 
+    			                       and current_menu == 'active_equipment' 
+    			                       or current_menu == 'active_manage_equipment'
+    			                       or current_menu == 'active_borrow' %}
+    			                       active
+    			                   {%  endif %} dropdown-toggle" 
+    			    href="#" id="navbarDropdown" 
+    			   	role="button" 
+    				data-toggle="dropdown" 
+    				aria-haspopup="true" 
+    				aria-expanded="false">
+    				Emprunter nos équipement
+    			</a>
     			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
     				<a class="dropdown-item" href="/equipement">Nos équipements</a>
-    				<a class="dropdown-item" href="/emprunt">Mes emprunts</a>
+    				{% if is_granted('ROLE_EDITOR') %}
+    					<a class="dropdown-item" href="/gerer-equipement">Gérer les équipements</a>
+    				{% endif %}
+    				{% if app.user %} 
+    					<a class="dropdown-item" href="/emprunt">Mes emprunts</a>
+    				{% endif %}
     			</div>
 			</li>
 			
