@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -47,6 +49,16 @@ class User implements UserInterface
      * @ORM\Column(type="json")
      */
     private $roles = [];
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Borrow", mappedBy="user", orphanRemoval=true)
+     */
+    private $borrows;
+
+    public function __construct()
+    {
+        $this->borrows = new ArrayCollection();
+    }
     
     public function getId(): ?int
     {
@@ -106,6 +118,37 @@ class User implements UserInterface
     
     public function eraseCredentials()
     {
+    }
+
+    /**
+     * @return Collection|Borrow[]
+     */
+    public function getBorrows(): Collection
+    {
+        return $this->borrows;
+    }
+
+    public function addBorrow(Borrow $borrow): self
+    {
+        if (!$this->borrows->contains($borrow)) {
+            $this->borrows[] = $borrow;
+            $borrow->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBorrow(Borrow $borrow): self
+    {
+        if ($this->borrows->contains($borrow)) {
+            $this->borrows->removeElement($borrow);
+            // set the owning side to null (unless already changed)
+            if ($borrow->getUser() === $this) {
+                $borrow->setUser(null);
+            }
+        }
+
+        return $this;
     }
     
 }
