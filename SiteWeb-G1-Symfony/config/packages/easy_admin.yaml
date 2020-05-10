@@ -1,0 +1,65 @@
+easy_admin:
+    site_name: 'Administration'
+    
+    user:
+        display_name: true
+        display_avatar: true
+        
+    design:
+        form_theme:
+            - "@EasyAdmin/form/bootstrap_4.html.twig"
+            - "@FOSCKEditor/Form/ckeditor_widget.html.twig"
+        menu:
+            - { label: 'Equipements' }
+            - { entity: 'Equipment', label: 'Equipements', icon: 'book' }
+            - { label: 'Utilisateurs' }
+            - { entity: 'User', label: 'Utilisateurs', icon: 'user' }
+            
+    formats:
+        datetime: 'd/m/Y a H:i'
+        
+    entities:
+        Equipment:
+            class: App\Entity\Equipment
+            label: 'Equipements' 
+            list:
+                fields:
+                    - id
+                    - { property: 'name', label: 'Nom' }
+                    - { property: 'stock'}
+                    - { property: 'duration_borrow_max', label: 'Temps de location max' }
+                    - { property: 'featured_image', label: 'Image', type: 'image', base_path: '%app.path.featured_images%' }
+                    - { property: 'created_at', label: 'Cree' }
+                    - { property: 'updated_at', label: 'Derniere modification' }
+                sort: ['created_at', 'desc']
+                
+            form:
+                fields:
+                    - { property: 'name', label: 'Nom' }
+                    - { property: 'description', type: 'fos_ckeditor', type_options: { config_name: 'main_config' }}
+                    - { property: 'duration_borrow_max', label: 'Temps de location max' }
+                    - { property: 'room', label: 'Salle'}
+                    - stock
+                    - { property: 'image_file', type: 'vich_image', label: 'Image' }
+                    
+        User:
+            class: App\Entity\User
+            label: 'Utilisateurs'
+            list:
+                fields:
+                    - id
+                    - email
+                    - { property: 'username', label: 'Pseudonyme'}
+                    - { property: 'roles', label: 'Roles', type: json_array}
+            edit:
+                fields:
+                    - email
+                    - { property: 'username', label: 'Pseudonyme'}
+                    - { property: 'roles', label: 'Roles', type: 'choice', type_options: {expanded: true, multiple: true, choices: {'Utilisateur':'ROLE_USER', 'Editeur':'ROLE_EDITOR', 'Administrateur':'ROLE_ADMIN'}}}
+            new: 
+                fields:
+                    - email
+                    - { property: 'username', label: 'Pseudonyme' }
+                    - { property: 'password', label: 'Mot de passe', class: 'SecurityController', function: 'registration' }
+                    - { property: 'roles', label: 'Roles', type: 'choice', type_options: {expanded: true, multiple: true, choices: {'Utilisateur':'ROLE_USER', 'Editeur':'ROLE_EDITOR', 'Administrateur':'ROLE_ADMIN'}}}
+                            

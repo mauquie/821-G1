@@ -5,9 +5,13 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EquipmentRepository")
+ * @Vich\Uploadable
  */
 class Equipment
 {
@@ -24,15 +28,32 @@ class Equipment
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(length=128, unique=true)
      */
-    private $equipment_slug;
+    private $slug;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
-
+    
+    /**
+     * @var \DameTime $created_at
+     * 
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    private $created_at;
+    
+    /**
+     * @var \DameTime $updated_at
+     * 
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    private $updated_at;
+    
     /**
      * @ORM\Column(type="integer")
      */
@@ -46,23 +67,41 @@ class Equipment
     /**
      * @ORM\Column(type="integer")
      */
-    private $equipment_stock;
+    private $stock;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string 
      */
     private $featured_image;
 
+    /**
+     * @Vich\UploadableField(mapping="featured_images", fileNameProperty="featured_image")
+     * @var File
+     */
+    private $image_file;
+    
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Borrow", mappedBy="equipment", orphanRemoval=true)
      */
     private $borrows;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\TeachingSubject", mappedBy="equipment")
+     */
+    private $teachingSubjects;
+
     public function __construct()
     {
         $this->borrows = new ArrayCollection();
+        $this->teachingSubjects = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->name;
+    }
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -80,16 +119,9 @@ class Equipment
         return $this;
     }
 
-    public function getEquipmentSlug(): ?string
+    public function getSlug(): ?string
     {
-        return $this->equipment_slug;
-    }
-
-    public function setEquipmentSlug(string $equipment_slug): self
-    {
-        $this->equipment_slug = $equipment_slug;
-
-        return $this;
+        return $this->slug;
     }
 
     public function getDescription(): ?string
@@ -103,7 +135,17 @@ class Equipment
 
         return $this;
     }
-
+    
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->created_at;
+    }  
+    
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    } 
+    
     public function getDurationBorrowMax(): ?int
     {
         return $this->duration_borrow_max;
@@ -128,28 +170,42 @@ class Equipment
         return $this;
     }
 
-    public function getEquipmentStock(): ?int
+    public function getStock(): ?int
     {
-        return $this->equipment_stock;
+        return $this->stock;
     }
 
-    public function setEquipmentStock(int $equipment_stock): self
+    public function setStock(int $stock): self
     {
-        $this->equipment_stock = $equipment_stock;
+        $this->stock = $stock;
 
         return $this;
     }
 
-    public function getFeaturedImage(): ?string
+    public function getFeaturedImage()
     {
         return $this->featured_image;
     }
 
-    public function setFeaturedImage(?string $featured_image): self
+    public function setFeaturedImage($featured_image)
     {
         $this->featured_image = $featured_image;
 
         return $this;
+    }
+    
+    public function getImageFile()
+    {
+        return $this->image_file;
+    }
+    
+    public function setImageFile(File $image = null)
+    {
+        $this->image_file = $image;
+        
+        if($image) {
+            $this->updated_at = new \DateTime('now');
+        }     
     }
 
     /**
@@ -178,6 +234,34 @@ class Equipment
             if ($borrow->getEquipment() === $this) {
                 $borrow->setEquipment(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|TeachingSubject[]
+     */
+    public function getTeachingSubjects(): Collection
+    {
+        return $this->teachingSubjects;
+    }
+
+    public function addTeachingSubject(TeachingSubject $teachingSubject): self
+    {
+        if (!$this->teachingSubjects->contains($teachingSubject)) {
+            $this->teachingSubjects[] = $teachingSubject;
+            $teachingSubject->addEquipment($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTeachingSubject(TeachingSubject $teachingSubject): self
+    {
+        if ($this->teachingSubjects->contains($teachingSubject)) {
+            $this->teachingSubjects->removeElement($teachingSubject);
+            $teachingSubject->removeEquipment($this);
         }
 
         return $this;

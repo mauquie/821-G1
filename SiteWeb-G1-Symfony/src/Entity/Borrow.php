@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BorrowRepository")
  */
@@ -29,7 +30,7 @@ class Borrow
     /**
      * @ORM\Column(type="integer")
      */
-    private $available_quantity;
+    private $quantity;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="borrows")
@@ -72,14 +73,14 @@ class Borrow
         return $this;
     }
 
-    public function getAvailableQuantity(): ?int
+    public function getQuantity(): ?int
     {
-        return $this->available_quantity;
+        return $this->quantity;
     }
 
-    public function setAvailableQuantity(int $available_quantity): self
+    public function setQuantity(int $available_quantity): self
     {
-        $this->available_quantity = $available_quantity;
+        $this->quantity = $available_quantity;
 
         return $this;
     }

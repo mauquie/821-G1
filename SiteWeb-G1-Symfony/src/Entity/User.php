@@ -60,6 +60,11 @@ class User implements UserInterface
         $this->borrows = new ArrayCollection();
     }
     
+    public function __toString()
+    {
+        return $this->email;
+    }
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -113,8 +118,6 @@ class User implements UserInterface
     {
         return null;
     }
-    
-    
     
     public function eraseCredentials()
     {
