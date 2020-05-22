@@ -8,9 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\TeachingSubjectRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\DisciplineRepository")
  */
-class TeachingSubject
+class Discipline
 {
     /**
      * @ORM\Id()
@@ -31,7 +31,7 @@ class TeachingSubject
     private $slug;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Equipment", inversedBy="teachingSubjects")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Equipment", inversedBy="disciplines")
      */
     private $equipment;
 

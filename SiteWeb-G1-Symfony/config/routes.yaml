@@ -3,4 +3,4 @@
 #    controller: App\Controller\DefaultController::index
 login:
     path:       /connexion
-    controller: App\Controller\SecurityController::security_login
+    controller: App\Controller\SecurityController::login

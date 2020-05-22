@@ -51,6 +51,8 @@ easy_admin:
                     - email
                     - { property: 'username', label: 'Pseudonyme'}
                     - { property: 'roles', label: 'Roles', type: json_array}
+                    - account_activation
+                   
             edit:
                 fields:
                     - email
@@ -60,6 +62,6 @@ easy_admin:
                 fields:
                     - email
                     - { property: 'username', label: 'Pseudonyme' }
-                    - { property: 'password', label: 'Mot de passe', class: 'SecurityController', function: 'registration' }
+                    - { property: 'password', label: 'Mot de passe' }
                     - { property: 'roles', label: 'Roles', type: 'choice', type_options: {expanded: true, multiple: true, choices: {'Utilisateur':'ROLE_USER', 'Editeur':'ROLE_EDITOR', 'Administrateur':'ROLE_ADMIN'}}}
                             

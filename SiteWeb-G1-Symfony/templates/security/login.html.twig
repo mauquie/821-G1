@@ -1,28 +1,50 @@
 {% extends 'base.html.twig' %}
 {% block encoding %}<meta charset="UTF-8">{% endblock %}
 {% block title %}Connexion - {% endblock %}
+
 {% block body %}
-
-
+    {% for message in app.flashes('message') %}
+    	<div class="alert alert-success" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+    
+    {% for message in app.flashes('danger') %}
+    	<div class="alert alert-danger" role="alert">
+            {{ message }}
+        </div>     
+    {% endfor %}
+    
+    {% for message in app.flashes('warning') %}
+    	<div class="alert alert-warning" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+    
     <H1>Connexion !</H1>
 	<br/>
 	
-    <form  action="{{ path('security_login')}}" method="post">
+    <form  action="{{ path('login') }}" method="post">
 		{% if error %}
         	<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-   		 {% endif %}
+   		{% endif %}
    		 
         <div class="form-group">
-            <input type="text" placeholder="Entrer votre email" required name="_username" value="{{ last_username }}" class="form-control">
+            <label for="inputEmail" class="sr-only">Email :</label>
+            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Entrer votre email" required autofocus>
         </div>
         
         <div class="form-group">
-            <input type="password" placeholder="Entrer votre mot de passe" required name="_password" class="form-control">
-        </div>
-        
-       	<div class="form-group">
-    		<button type="submit" class="btn btn-success">Se connecter</button>
-		</div>
+            <label for="inputPassword" class="sr-only">Mot de passe :</label>
+            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Entrer votre mot de passe" required>
+    	</div>
+    	
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"> 
+
+    	<button type="submit" class="btn btn-success">Se connecter</button>
+
+        <button type="button" class="btn btn-secondary" onclick="window.location.href = '{{ path('forgotten_password') }}';">Mot de passe oublié</button>
+      
     </form>
     
 {% endblock %}

@@ -87,9 +87,9 @@ class Equipment
     private $borrows;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\TeachingSubject", mappedBy="equipment")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Discipline", mappedBy="equipment")
      */
-    private $teachingSubjects;
+    private $disciplines;
 
     public function __construct()
     {
@@ -240,14 +240,14 @@ class Equipment
     }
 
     /**
-     * @return Collection|TeachingSubject[]
+     * @return Collection|Discipline[]
      */
-    public function getTeachingSubjects(): Collection
+    public function getDisciplines(): Collection
     {
-        return $this->teachingSubjects;
+        return $this->disciplines;
     }
 
-    public function addTeachingSubject(TeachingSubject $teachingSubject): self
+    public function addDiscipline(Discipline $discipline): self
     {
         if (!$this->teachingSubjects->contains($teachingSubject)) {
             $this->teachingSubjects[] = $teachingSubject;
@@ -257,11 +257,11 @@ class Equipment
         return $this;
     }
 
-    public function removeTeachingSubject(TeachingSubject $teachingSubject): self
+    public function removeDiscipline(Discipline $discipline): self
     {
-        if ($this->teachingSubjects->contains($teachingSubject)) {
-            $this->teachingSubjects->removeElement($teachingSubject);
-            $teachingSubject->removeEquipment($this);
+        if ($this->disciplines->contains($discipline)) {
+            $this->disciplines->removeElement($discipline);
+            $discipline->removeEquipment($this);
         }
 
         return $this;

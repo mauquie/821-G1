@@ -12,7 +12,7 @@ class MainController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function accueil()
+    public function index()
     {
         return $this->render('site-pages/home.html.twig', [
             'current_menu' => 'active_home'
@@ -26,17 +26,6 @@ class MainController extends AbstractController
     {
         return $this->render('site-pages/equipment.html.twig', [ 
             'current_menu' => 'active_equipment'
-        ]);
-    }
-    
-    /**
-     * @Route("/gerer-equipement", name="manage_equipment")
-     * @Security("is_granted('ROLE_EDITOR')")
-     */
-    public function manage_equipement()
-    {
-        return $this->render('editor/manageEquipment.html.twig', [
-            'current_menu' => 'active_manage_equipment'
         ]);
     }
     
@@ -60,14 +49,5 @@ class MainController extends AbstractController
             'current_menu' => 'active_place'
         ]);
     }
-    
-    /**
-     * @Route("/contact", name="contact")
-     */
-    public function contact()
-    {
-        return $this->render('site-pages/contact.html.twig', [
-            'current_menu' => 'active_contact'
-        ]);
-    }
+
 }
