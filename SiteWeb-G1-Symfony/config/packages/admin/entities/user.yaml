@@ -2,6 +2,9 @@ easy_admin:
     entities:
         User:
             class: App\Entity\User
+            templates:
+                edit: 'admin/user/edit.html.twig'
+                new: 'admin/user/new.html.twig'
             label: 'Utilisateurs'    
             list:
                 actions:

@@ -39,6 +39,11 @@ class Discipline
     {
         $this->equipment = new ArrayCollection();
     }
+    
+    public function __toString()
+    {
+        return $this->name;
+    }
 
     public function getId(): ?int
     {
@@ -59,7 +64,7 @@ class Discipline
 
     public function getSlug(): ?string
     {
-        return $this->teaching_subject_slug;
+        return $this->slug;
     }
 
     /**

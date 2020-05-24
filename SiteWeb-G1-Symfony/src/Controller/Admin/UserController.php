@@ -3,13 +3,13 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
-use App\Form\RegistrationType;
 use App\Repository\UserRepository;
 use App\Security\UserAuthenticator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use EasyCorp\Bundle\EasyAdminBundle\Form\Type\EasyAdminFormType;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\EasyAdminController;
 
 class UserController extends EasyAdminController
@@ -18,7 +18,7 @@ class UserController extends EasyAdminController
     public function index(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator,\Swift_Mailer $mailer): Response
     {
         $user = new User();
-        $form = $this->createForm(RegistrationType::class, $user);
+        $form = $this->createForm(EasyAdminFormType::class, $user);
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
@@ -53,9 +53,10 @@ class UserController extends EasyAdminController
             $mailer->send($message);
         }
         
-        return $this->render('registration/register.html.twig', [
+        return $this->render('admin', [
             'registrationForm' => $form->createView()
         ]);
     }
     
+    // '../vendor/easycorp/easyadmin-bundle/src/Ressources/views/default/menu.html.twig'
 }

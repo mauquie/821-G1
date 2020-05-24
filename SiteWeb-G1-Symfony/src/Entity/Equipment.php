@@ -94,7 +94,7 @@ class Equipment
     public function __construct()
     {
         $this->borrows = new ArrayCollection();
-        $this->teachingSubjects = new ArrayCollection();
+        $this->disciplines = new ArrayCollection();
     }
 
     public function __toString()
@@ -249,9 +249,9 @@ class Equipment
 
     public function addDiscipline(Discipline $discipline): self
     {
-        if (!$this->teachingSubjects->contains($teachingSubject)) {
-            $this->teachingSubjects[] = $teachingSubject;
-            $teachingSubject->addEquipment($this);
+        if (!$this->disciplines->contains($discipline)) {
+            $this->disciplines[] = $discipline;
+            $discipline->addEquipment($this);
         }
 
         return $this;

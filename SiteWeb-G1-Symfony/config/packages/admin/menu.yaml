@@ -4,8 +4,9 @@ easy_admin:
             - "@EasyAdmin/form/bootstrap_4.html.twig"
             - "@FOSCKEditor/Form/ckeditor_widget.html.twig"
         menu:
-            - { label: 'Equipements' }
-            - { entity: 'Equipment', label: 'Equipements', icon: 'book' }
+            - { label: 'Inventaire' }
+            - { entity: 'Equipment', label: 'Equipements', icon: 'toolbox' }
+            - { entity: 'Discipline', label: 'Discipline', icon: 'book' }
             - { label: 'Utilisateurs' }
             - { entity: 'User', label: 'Utilisateurs', icon: 'user' }
   

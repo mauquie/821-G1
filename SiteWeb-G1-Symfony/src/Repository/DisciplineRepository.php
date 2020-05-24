@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\TeachingSubject;
+use App\Entity\Discipline;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method TeachingSubject|null find($id, $lockMode = null, $lockVersion = null)
- * @method TeachingSubject|null findOneBy(array $criteria, array $orderBy = null)
- * @method TeachingSubject[]    findAll()
- * @method TeachingSubject[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Discipline|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Discipline|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Discipline[]    findAll()
+ * @method Discipline[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class TeachingSubjectRepository extends ServiceEntityRepository
+class DisciplineRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, TeachingSubject::class);
+        parent::__construct($registry, Discipline::class);
     }
 
     // /**
-    //  * @return TeachingSubject[] Returns an array of TeachingSubject objects
+    //  * @return Discipline[] Returns an array of Discipline objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class TeachingSubjectRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?TeachingSubject
+    public function findOneBySomeField($value): ?Discipline
     {
         return $this->createQueryBuilder('t')
             ->andWhere('t.exampleField = :val')

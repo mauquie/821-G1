@@ -43,6 +43,11 @@ class Borrow
      * @ORM\JoinColumn(nullable=false)
      */
     private $equipment;
+    
+    public function __toString()
+    {
+        return $this->id;
+    }
 
     public function getId(): ?int
     {

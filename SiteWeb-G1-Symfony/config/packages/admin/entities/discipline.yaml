@@ -1,0 +1,19 @@
+easy_admin:
+    entities:
+        Discipline:
+            class: App\Entity\Discipline
+            label: 'Disciplines' 
+            list:
+                actions:
+                    - { name: 'edit', icon: 'pencil', label: 'Modifier', css_class: 'btn btn-secondary' }
+                    - { name: 'delete', icon: 'trash', label: 'Supprimer', css_class: 'btn btn-danger' }
+                fields:
+                    - id
+                    - { property: 'name', label: 'Nom' }
+                    - slug
+                
+            form:
+                fields:
+                    - { property: 'name', label: 'Nom' }
+
+    
