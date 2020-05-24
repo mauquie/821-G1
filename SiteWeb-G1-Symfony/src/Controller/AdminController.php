@@ -13,7 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @Route("/admin", name="admin_")
+ * @Route("/administrateur", name="admin_")
  * @Security("is_granted('ROLE_ADMIN')")
  */
 class AdminController extends AbstractController

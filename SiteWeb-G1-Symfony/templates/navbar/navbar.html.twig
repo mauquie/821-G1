@@ -12,29 +12,14 @@
 				<a class="nav-link {% if current_menu is defined and current_menu == 'active_home' %}active{%  endif %}" href="{{ path('home') }}">Accueil</a>
 			</li>
 			
-			<li class="nav-item dropdown">
-    			<a class="nav-link {% if current_menu is defined 
-    			                       and current_menu == 'active_equipment' 
-    			                       or current_menu == 'active_borrow' %}
-    			                       active
-    			                   {%  endif %} dropdown-toggle" 
-    			    href="#" id="navbarDropdown" 
-    			   	role="button" 
-    				data-toggle="dropdown" 
-    				aria-haspopup="true" 
-    				aria-expanded="false">
-    				Emprunter nos équipement
-    			</a>
-    			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-    				<a class="dropdown-item" href="/equipement">Nos équipements</a>
-    				{% if is_granted('ROLE_EDITOR') %}
-    					<a class="dropdown-item" href="/gerer-equipement">Gérer les équipements</a>
-    				{% endif %}
-    				{% if app.user %} 
-    					<a class="dropdown-item" href="/emprunt">Mes emprunts</a>
-    				{% endif %}
-    			</div>
+			<li class="nav-item">
+				<a class="nav-link {% if current_menu is defined and current_menu == 'active_equipment' %}active{%  endif %}" href="{{ path('equipment') }}">Emprunter nos équipements</a>
 			</li>
+			{% if app.user %}
+    			<li class="nav-item">
+    				<a class="nav-link {% if current_menu is defined and current_menu == 'active_borrow' %}active{%  endif %}" href="{{ path('borrow') }}">Mes emprunts</a>
+    			</li>
+    		{% endif %}
 			
 			<li class="nav-item">
 				<a class="nav-link {% if current_menu is defined and current_menu == 'active_place' %}active{%  endif %}" href="{{ path('place') }}">Lieu</a>

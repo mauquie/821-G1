@@ -1,0 +1,28 @@
+easy_admin:
+    entities:
+        User:
+            class: App\Entity\User
+            label: 'Utilisateurs'    
+            list:
+                actions:
+                    - { name: 'edit', icon: 'pencil', label: 'Modifier', css_class: 'btn btn-secondary' }
+                    - { name: 'delete', icon: 'trash', label: 'Supprimer', css_class: 'btn btn-danger' }
+                fields:
+                    - id
+                    - email
+                    - { property: 'username', label: 'Pseudonyme'}
+                    - { property: 'roles', label: 'Roles', type: json_array}
+                    - account_activation
+                   
+            edit:
+                fields:
+                    - email
+                    - { property: 'username', label: 'Pseudonyme'}
+                    - { property: 'roles', label: 'Roles', type: 'choice', type_options: {expanded: true, multiple: true, choices: {'Utilisateur':'ROLE_USER', 'Editeur':'ROLE_EDITOR', 'Administrateur':'ROLE_ADMIN'}}}
+            new: 
+                fields:
+                    - email
+                    - { property: 'username', label: 'Pseudonyme' }
+                    - { property: 'password', label: 'Mot de passe'}
+                    - { property: 'roles', label: 'Roles', type: 'choice', type_options: {expanded: true, multiple: true, choices: {'Utilisateur':'ROLE_USER', 'Editeur':'ROLE_EDITOR', 'Administrateur':'ROLE_ADMIN'}}}
+        

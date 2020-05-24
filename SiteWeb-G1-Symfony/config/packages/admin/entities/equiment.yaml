@@ -1,0 +1,28 @@
+easy_admin:
+    entities:
+        Equipment:
+            class: App\Entity\Equipment
+            label: 'Equipements' 
+            list:
+                actions:
+                    - { name: 'edit', icon: 'pencil', label: 'Modifier', css_class: 'btn btn-secondary' }
+                    - { name: 'delete', icon: 'trash', label: 'Supprimer', css_class: 'btn btn-danger' }
+                fields:
+                    - id
+                    - { property: 'name', label: 'Nom' }
+                    - { property: 'stock'}
+                    - { property: 'duration_borrow_max', label: 'Temps de location max' }
+                    - { property: 'featured_image', label: 'Image', type: 'image', base_path: '%app.path.featured_images%' }
+                    - { property: 'created_at', label: 'Cree' }
+                    - { property: 'updated_at', label: 'Derniere modification' }
+                sort: ['created_at', 'desc']
+                
+            form:
+                fields:
+                    - { property: 'name', label: 'Nom' }
+                    - { property: 'description', type: 'fos_ckeditor', type_options: { config_name: 'main_config' }}
+                    - { property: 'duration_borrow_max', label: 'Temps de location max' }
+                    - { property: 'room', label: 'Salle'}
+                    - stock
+                    - { property: 'image_file', type: 'vich_image', label: 'Image' }
+    
