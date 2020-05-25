@@ -7,29 +7,33 @@
     	<h1>Mes Emprunts</h1>
       	<br>
     </div>
-    
-	<table id="borrows" class="table" data-toggle="table" data-search="true" data-pagination="true">
-        <thead>
-			<tr>
-                <th><center>ID utilisateur</center></th>
-                <th><center>ID équipments</center></th>
-                <th><center>Début emprunt</center></th>
-                <th><center>Fin emprunt</center></th>
-                <th data-sortable="true" data-field="Quantité"><center>Quantité</center></th>
-			</tr>
-		</thead>
-        <tbody>
-        	{%  for borrow in borrows %}
-        		<tr>
-        			<td><center>{{ borrow.user }}</center></td>
-        			<td><center>{{ borrow.equipment }}</center></td>
-        			<td><center>{{ borrow.borrowStart | date("m/d/Y") }}</center></td>	
-        			<td><center>{{ borrow.borrowEnd | date("m/d/Y") }}</center></td>	
-        			<td><center>{{ borrow.quantity }}</center></td>	
-          		</tr>
-          	{% endfor %}
-          	
-    	</tbody>
-	</table>
-
+        {% if app.user == email %}
+			<table id="borrows" class="table" data-toggle="table" data-search="true" data-pagination="true">
+    			<thead>
+        			<tr>
+                        <th><center>ID utilisateur</center></th>
+                        <th><center>ID équipment</center></th>
+                        <th><center>Début emprunt</center></th>
+                        <th><center>Fin emprunt</center></th>
+                        <th data-sortable="true" data-field="Quantité"><center>Quantité</center></th>
+        			</tr>
+        		</thead>
+       			<tbody>
+                	<tr>
+                		{% for borrow in borrows %}
+                			{% if app.user == borrow.user %}
+                            	<td><center>{{ borrow.user }}</center></td>
+                            	<td><center>{{ borrow.equipment }}</center></td>
+                            	<td><center>{{ borrow.borrowStart | date("m/d/Y") }}</center></td>	
+                            	<td><center>{{ borrow.borrowEnd | date("m/d/Y") }}</center></td>	
+                            	<td><center>{{ borrow.quantity }}</center></td>
+                            {% endif %}
+                    	{% endfor %}
+                    </tr>	
+            	</tbody>
+       		</table> 
+		{% else %}
+    		<h2>Vous n'avez pas encore effectué d'emprunt sur notre site !</h2>       
+    	{% endif %}
+ 
 {% endblock %}
