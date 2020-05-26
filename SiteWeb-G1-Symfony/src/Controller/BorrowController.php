@@ -2,9 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
-use App\Entity\Borrow;
-use App\Repository\UserRepository;
 use App\Repository\BorrowRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,22 +16,25 @@ class BorrowController extends AbstractController
      * @Route("/emprunt", name="borrow")
      * @Security("is_granted('ROLE_USER')")
      */
-    public function index(BorrowRepository $repositoryBorrow, UserRepository $repositoryUser, Borrow $borrow)
+    public function index(BorrowRepository $borrows)
     {
-        $user->getEmail();
-        $email = $repository->findBy([ 'user' => $user ]);
+        // On récupère l'utilisateur connecté
+        $user = $this->getUser();
+        // On récupère l'ID de l'utilisateur 
+        $userId = $user->getId();
         
-        $equipment = $borrow->getEquipment();
-        $borrowStart = $borrow->getBorrowStart();
-        $borrowEnd = $borrow->getBorrowEnd();
-        $quantity = $borrow->getQuantity();
+        // On récupère l'utilisateur ayant passé au moins un emprunt
+        $userBorrow = $borrows->findOneBy([ 'user' => $userId ]);
+        // On récupère les différents emprunts de l'utilisateur dans un tableau
+        $borrow = $borrows->findBy([ 'user' => $userId ]);
         
-        $borrows = $repository->find($email, $equipment, $borrowStart, $borrowEnd, $quantity);
+        // Affiche les informations liées à la BD récupérée dans une variable -- FACULTATIF
+        dump($borrow);
         
         return $this->render('borrow/borrows.html.twig', [
             'current_menu' => 'active_borrow',
-            'borrows' => $borrows,
-            'email' => $user
+            'borrows' => $borrow,
+            'user' => $userBorrow
         ]);
     }
     

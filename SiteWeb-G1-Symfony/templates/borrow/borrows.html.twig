@@ -7,7 +7,7 @@
     	<h1>Mes Emprunts</h1>
       	<br>
     </div>
-        {% if app.user == email %}
+        {% if user.id is defined and app.user.id == user.id %}
 			<table id="borrows" class="table" data-toggle="table" data-search="true" data-pagination="true">
     			<thead>
         			<tr>
@@ -19,21 +19,22 @@
         			</tr>
         		</thead>
        			<tbody>
-                	<tr>
-                		{% for borrow in borrows %}
-                			{% if app.user == borrow.user %}
-                            	<td><center>{{ borrow.user }}</center></td>
-                            	<td><center>{{ borrow.equipment }}</center></td>
-                            	<td><center>{{ borrow.borrowStart | date("m/d/Y") }}</center></td>	
-                            	<td><center>{{ borrow.borrowEnd | date("m/d/Y") }}</center></td>	
-                            	<td><center>{{ borrow.quantity }}</center></td>
-                            {% endif %}
-                    	{% endfor %}
-                    </tr>	
+       				{% for borrow in borrows %}
+                		{% if app.user == borrow.user %}
+                			<tr>
+                                <td><center>{{ borrow.user }}</center></td>
+                                <td><center>{{ borrow.equipment }}</center></td>
+                                <td><center>{{ borrow.borrowStart | date("m/d/Y") }}</center></td>	
+                                <td><center>{{ borrow.borrowEnd | date("m/d/Y") }}</center></td>	
+                                <td><center>{{ borrow.quantity }}</center></td>                      
+                    		</tr>	
+                        {% endif %}
+                    {% endfor %}
             	</tbody>
        		</table> 
 		{% else %}
-    		<h2>Vous n'avez pas encore effectué d'emprunt sur notre site !</h2>       
+    		<h2>Vous n'avez pas encore effectué d'emprunt sur notre site !</h2>  
+    		   
     	{% endif %}
  
 {% endblock %}
