@@ -5,7 +5,7 @@ easy_admin:
             templates:
                 edit: 'admin/user/edit.html.twig'
                 new: 'admin/user/new.html.twig'
-            label: 'Utilisateurs'    
+            label: 'Utilisateur'    
             list:
                 actions:
                     - { name: 'edit', icon: 'pencil', label: 'Modifier', css_class: 'btn btn-secondary' }

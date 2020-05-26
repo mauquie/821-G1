@@ -1,0 +1,26 @@
+easy_admin:
+    entities:
+        Borrow:
+            class: App\Entity\Borrow
+            label: 'Emprunt' 
+            list:
+                actions:
+                    - { name: 'edit', icon: 'pencil', label: 'Modifier', css_class: 'btn btn-secondary' }
+                    - { name: 'delete', icon: 'trash', label: 'Supprimer', css_class: 'btn btn-danger' }
+                fields:
+                    - id
+                    - { property: 'user', label: 'Email' }
+                    - { property: 'equipment', label: 'Equipement' }
+                    - { property: 'borrow_start', label: 'Date debut emprunt' }
+                    - { property: 'borrow_end', label: 'Date fin emprunt' }
+                    - { property: 'quantity', label: 'Quantite' }
+                    
+                sort: ['borrow_end', 'asc']
+                
+            form:
+                fields:
+                    - { property: 'user', label: 'Email utilisateur' }
+                    - { property: 'equipment', label: 'Equipement emprunte' }
+                    - { property: 'borrow_start', label: 'Date debut emprunt' }
+                    - { property: 'borrow_end', label: 'Date fin emprunt' }
+                    - { property: 'quantity', label: 'Quantite emprunte' }

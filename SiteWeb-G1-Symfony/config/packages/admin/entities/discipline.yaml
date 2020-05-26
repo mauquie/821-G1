@@ -2,7 +2,7 @@ easy_admin:
     entities:
         Discipline:
             class: App\Entity\Discipline
-            label: 'Disciplines' 
+            label: 'Discipline' 
             list:
                 actions:
                     - { name: 'edit', icon: 'pencil', label: 'Modifier', css_class: 'btn btn-secondary' }

@@ -2,7 +2,7 @@ easy_admin:
     entities:
         Equipment:
             class: App\Entity\Equipment
-            label: 'Equipements' 
+            label: 'Equipement' 
             list:
                 actions:
                     - { name: 'edit', icon: 'pencil', label: 'Modifier', css_class: 'btn btn-secondary' }
