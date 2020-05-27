@@ -25,15 +25,19 @@
         			<td><center>{{ equipment.name }}</center></td>
         			<td><center>{{ equipment.durationBorrowMax }}</center></td>	
         			<td><center>{{ equipment.stock }}</center></td>	
-                	<td>             		
-                	 	<a href="#" button type="button" class="btn btn-secondary" data-toggle="popover" title="Description" data-content="{{ equipment.description }}">Détails</a>
+                	<td>            		
+                	 	<button type="button" class="btn btn-secondary" data-toggle="popover" data-trigger="focus" title="Description" tabindex="0" data-content="{{ equipment.description }}">Détails</button>
                 	 	
 						<script>
 						$(document).ready(function(){
-  				  			$('[data-toggle="popover"]').popover();   
-						});
+							$('[data-toggle="popover"]').popover();
+                        });
+                        $('.popover-dismiss').popover({
+                              trigger: 'focus'
+                        });
+                        
 						</script>
-					
+						
                 		<button type="button" class="btn btn-success">Emprunter</button>
                 	</td>
           		</tr>
