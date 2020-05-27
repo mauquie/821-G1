@@ -16,7 +16,7 @@
                 <th data-sortable="true" data-field="Temps de disponibilité maximal de location"><center>Temps de disponibilité maximal de location</center></th>
                 <th data-sortable="true" data-field="Quantité disponible"><center>Quantité disponible</center></th>
                 <th><center>Caractéristiques</center></th>
-			</tr>
+			</tr> 
 		</thead>
         <tbody>
         	{%  for equipment in equipments %}
@@ -25,8 +25,15 @@
         			<td><center>{{ equipment.name }}</center></td>
         			<td><center>{{ equipment.durationBorrowMax }}</center></td>	
         			<td><center>{{ equipment.stock }}</center></td>	
-                	<td>
-                		<button type="button" class="btn btn-secondary">Détails</button>
+                	<td>             		
+                	 	<a href="#" button type="button" class="btn btn-secondary" data-toggle="popover" title="Description" data-content="{{ equipment.description }}">Détails</a>
+                	 	
+						<script>
+						$(document).ready(function(){
+  				  			$('[data-toggle="popover"]').popover();   
+						});
+						</script>
+					
                 		<button type="button" class="btn btn-success">Emprunter</button>
                 	</td>
           		</tr>
