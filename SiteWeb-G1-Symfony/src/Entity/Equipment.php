@@ -29,7 +29,7 @@ class Equipment
 
     /**
      * @Gedmo\Slug(fields={"name"})
-     * @ORM\Column(length=128, unique=true)
+     * @ORM\Column(type="string", length=128, unique=true)
      */
     private $slug;
 
@@ -60,11 +60,6 @@ class Equipment
     private $duration_borrow_max;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $room;
-
-    /**
      * @ORM\Column(type="integer")
      */
     private $stock;
@@ -90,6 +85,11 @@ class Equipment
      * @ORM\ManyToMany(targetEntity="App\Entity\Discipline", mappedBy="equipment")
      */
     private $disciplines;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Room", inversedBy="equipment")
+     */
+    private $room;
 
     public function __construct()
     {
@@ -154,18 +154,6 @@ class Equipment
     public function setDurationBorrowMax(int $duration_borrow_max): self
     {
         $this->duration_borrow_max = $duration_borrow_max;
-
-        return $this;
-    }
-
-    public function getRoom(): ?string
-    {
-        return $this->room;
-    }
-
-    public function setRoom(?string $room): self
-    {
-        $this->room = $room;
 
         return $this;
     }
@@ -263,6 +251,18 @@ class Equipment
             $this->disciplines->removeElement($discipline);
             $discipline->removeEquipment($this);
         }
+
+        return $this;
+    }
+
+    public function getRoom(): ?Room
+    {
+        return $this->room;
+    }
+
+    public function setRoom(?Room $room): self
+    {
+        $this->room = $room;
 
         return $this;
     }

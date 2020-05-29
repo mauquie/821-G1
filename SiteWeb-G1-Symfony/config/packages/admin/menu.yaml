@@ -7,8 +7,9 @@ easy_admin:
             - { label: 'Inventaire' }
             - { entity: 'Equipment', label: 'Equipements', icon: 'toolbox' }
             - { entity: 'Discipline', label: 'Disciplines', icon: 'book' }
+            - { entity: 'Room', label: 'Salles', icon: 'building' }
             - { label: 'Les emprunts' }
-            - { entity: 'Borrow', label: 'Emprunts', icon: 'book' }
+            - { entity: 'Borrow', label: 'Emprunts', icon: 'book-reader' }
             - { label: 'Les utilisateurs' }
             - { entity: 'User', label: 'Utilisateurs', icon: 'user' }
   

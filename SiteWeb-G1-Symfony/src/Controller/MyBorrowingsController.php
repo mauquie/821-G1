@@ -37,5 +37,4 @@ class MyBorrowingsController extends AbstractController
             'user' => $userBorrow
         ]);
     }
-    
 }

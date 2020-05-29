@@ -13,6 +13,7 @@ easy_admin:
                     - { property: 'stock'}
                     - { property: 'duration_borrow_max', label: 'Temps de location max' }
                     - { property: 'disciplines', label: 'Disciplines', type: 'array' }
+                    - { property: 'room', label: 'Salle' }
                     - { property: 'featured_image', label: 'Image', type: 'image', base_path: '%app.path.featured_images%' }
                     - { property: 'created_at', label: 'Cree' }
                     - { property: 'updated_at', label: 'Derniere modification' }
@@ -23,8 +24,7 @@ easy_admin:
                     - { property: 'name', label: 'Nom' }
                     - { property: 'description', type: 'fos_ckeditor', type_options: { config_name: 'main_config' }}
                     - { property: 'duration_borrow_max', label: 'Temps de location max' }
-                    - { property: 'room', label: 'Salle'}
                     - stock
                     - { property: 'image_file', type: 'vich_image', label: 'Image' }
                     - { property: 'disciplines', label: 'Disciplines', type: 'entity', type_options: { class: 'App\Entity\Discipline', multiple: true, by_reference: false, attr: { data-widget: 'select2' }}}
-    
+                    - { property: 'room', label: 'Salle' }

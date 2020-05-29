@@ -1,0 +1,17 @@
+easy_admin:
+    entities:
+        Room:
+            class: App\Entity\Room
+            label: 'Salle' 
+            list:
+                actions:
+                    - { name: 'edit', icon: 'pencil', label: 'Modifier', css_class: 'btn btn-secondary' }
+                    - { name: 'delete', icon: 'trash', label: 'Supprimer', css_class: 'btn btn-danger' }
+                fields:
+                    - id
+                    - { property: 'name', label: 'Nom' }
+                    - slug
+                
+            form:
+                fields:
+                    - { property: 'name', label: 'Nom' }

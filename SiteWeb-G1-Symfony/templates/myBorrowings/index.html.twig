@@ -11,7 +11,6 @@
 			<table id="borrows" class="table" data-toggle="table" data-search="true" data-pagination="true">
     			<thead>
         			<tr>
-                        <th><center>Email</center></th>
                         <th><center>Equipement</center></th>
                         <th><center>Début emprunt</center></th>
                         <th><center>Fin emprunt</center></th>
@@ -22,7 +21,6 @@
        				{% for borrow in borrows %}
                 		{% if app.user == borrow.user %}
                 			<tr>
-                                <td><center>{{ borrow.user }}</center></td>
                                 <td><center>{{ borrow.equipment }}</center></td>
                                 <td><center>{{ borrow.borrowStart | date("m/d/Y") }}</center></td>	
                                 <td><center>{{ borrow.borrowEnd | date("m/d/Y") }}</center></td>	
