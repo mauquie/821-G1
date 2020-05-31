@@ -34,7 +34,7 @@ class MyBorrowingsController extends AbstractController
         return $this->render('myBorrowings/index.html.twig', [
             'current_menu' => 'active_borrow',
             'borrows' => $borrow,
-            'user' => $userBorrow
+            'borrow' => $userBorrow
         ]);
     }
 }

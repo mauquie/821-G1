@@ -22,7 +22,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/connexion", name="login")
      */
-    public function login(AuthenticationUtils $authenticationUtils)
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -107,7 +107,7 @@ class SecurityController extends AbstractController
                 $mailer->send($message);
                 
                 // On crée le message flash de confirmation
-                $this->addFlash('message', 'E-mail de réinitialisation du mot de passe envoyé !');
+                $this->addFlash('message', 'E-mail de reinitialisation du mot de passe envoye !');
                 
                 // On redirige vers la page de login
                 return $this->redirectToRoute('login');
@@ -146,9 +146,13 @@ class SecurityController extends AbstractController
             // On supprime le token
             $user->setResetToken(null);
             
-            // Encode le mot de passe récupérer
-            $password = $passwordEncoder->encodePassword($user, $user->getPassword());
-            $user->setPassword($password);
+            // Encode le mot de passe réinitialiser
+            $user->setPassword(
+                $passwordEncoder->encodePassword(
+                    $user,
+                    $form->get('password')->getData()
+                    )
+                );
             
             // On stocke le nouveau mot de passe dans la base de donnée
             $entityManager = $this->getDoctrine()->getManager();
@@ -156,7 +160,7 @@ class SecurityController extends AbstractController
             $entityManager->flush();
             
             // On crée le message flash
-            $this->addFlash('message', 'Mot de passe mis à jour');
+            $this->addFlash('message', 'Mot de passe mis a jour');
             
             // On redirige vers la page de connexion
             return $this->redirectToRoute('login');

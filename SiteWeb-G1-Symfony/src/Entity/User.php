@@ -60,7 +60,7 @@ class User implements UserInterface
     /**
      * @var bool
      * 
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", options={"default":false})
      */
     private $account_activation;
 

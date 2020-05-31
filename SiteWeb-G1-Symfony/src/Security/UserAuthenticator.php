@@ -45,8 +45,8 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator
     public function getCredentials(Request $request)
     {
         $credentials = [
-            'email' => $request->request->get('email'),
-            'password' => $request->request->get('password'),
+            'email' => $request->request->get('_email'),
+            'password' => $request->request->get('_password'),
             'csrf_token' => $request->request->get('_csrf_token')
         ];
         
@@ -69,7 +69,7 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator
         
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('L\'adresse mail n\'a pas été trouvé.');
+            throw new CustomUserMessageAuthenticationException('Adresse mail invalide !');
         }
 
         return $user;

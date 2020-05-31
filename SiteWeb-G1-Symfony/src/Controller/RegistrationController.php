@@ -18,7 +18,7 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/inscription", name="registration")
      */
-    public function index(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator,\Swift_Mailer $mailer): Response
+    public function index(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, UserAuthenticator $authenticator, \Swift_Mailer $mailer): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationType::class, $user);
@@ -27,8 +27,12 @@ class RegistrationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             
             // Encode le mot de passe récupérer
-            $password = $passwordEncoder->encodePassword($user, $user->getPassword());
-            $user->setPassword($password);
+            $user->setPassword(
+                $passwordEncoder->encodePassword(
+                    $user,
+                    $form->get('password')->getData()
+                    )
+                );
             
             // On génère un token et on l'enregistre
             $user->setActivationToken(md5(uniqid()));
@@ -54,17 +58,20 @@ class RegistrationController extends AbstractController
                 )
             ;
             $mailer->send($message);
-
-            return $this->redirectToRoute('login');
+            
+            // On génère un message
+            $this->addFlash('message', 'Un email a ete envoye a votre adresse mail pour verifier votre compte' );
+            
+            //return $this->redirectToRoute('login');
                 
-            /* Connexion automatique après avoir créé un compte
+            // Connexion automatique après avoir créé un compte
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,
                 $request,
                 $authenticator,
                 'main' // firewall name in security.yaml
             );
-            */
+            
         }
 
         return $this->render('registration/register.html.twig', [
