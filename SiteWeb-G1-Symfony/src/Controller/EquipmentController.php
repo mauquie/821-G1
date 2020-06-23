@@ -15,6 +15,7 @@ class EquipmentController extends AbstractController
      */
     public function index(EquipmentRepository $repository)
     {
+        dump($repository->findAll());
         
         return $this->render('equipment/index.html.twig', [
             'current_menu' => 'active_equipment',

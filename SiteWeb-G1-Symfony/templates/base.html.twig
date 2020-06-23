@@ -15,8 +15,7 @@
 	<body>
         {% include 'navbar/navbar.html.twig' %}
     	<div class="container">
-            {% block body %}
-            	{% for message in app.flashes('message') %}
+    		{% for message in app.flashes('message') %}
                 	<div class="alert alert-success" role="alert">
                         {{ message }}
                     </div>
@@ -32,8 +31,8 @@
                 	<div class="alert alert-warning" role="alert">
                         {{ message }}
                     </div>
-                {% endfor %}
-            {% endblock %}
+            {% endfor %}
+            {% block body %}{% endblock %}
         </div>
 
         <!-- Optional JavaScript -->

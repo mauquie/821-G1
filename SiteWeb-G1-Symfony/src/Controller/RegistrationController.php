@@ -60,7 +60,7 @@ class RegistrationController extends AbstractController
             $mailer->send($message);
             
             // On génère un message
-            $this->addFlash('message', 'Un email a ete envoye a votre adresse mail pour verifier votre compte' );
+            $this->addFlash('message', 'Vous avez recu un mail pour verifier votre compte !' );
             
             //return $this->redirectToRoute('login');
                 

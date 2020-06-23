@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Equipment;
 use App\Repository\BorrowRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
