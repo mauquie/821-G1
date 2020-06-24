@@ -21,11 +21,11 @@ class AdminController extends AbstractController
     /**
      * @Route("/utilisateurs", name="interface_users")
      */
-    public function usersList(UserRepository $user)
+    public function usersList(UserRepository $users)
     {
         return $this->render('admin/users.html.twig', [ 
             'current_menu' => 'active_interface_users',
-            'users' => $user->findAll() 
+            'users' => $users->findAll() 
         ]);        
     }
     

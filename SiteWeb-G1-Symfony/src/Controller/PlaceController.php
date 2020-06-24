@@ -11,7 +11,7 @@ class PlaceController extends AbstractController
     /**
      * @Route("/lieu", name="place")
      */
-    public function lieu()
+    public function index()
     {
         return $this->render('place/index.html.twig', [
             'current_menu' => 'active_place'

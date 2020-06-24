@@ -21,7 +21,7 @@
         <tbody>
         	{%  for equipment in equipments %}
         		<tr>
-        			<td><center><img src="uploads/images/featured/{{ equipment.featuredImage }}" alt="{{ equipment.slug }}" style="width:100%"></center></td>
+        			<td><center><img src="uploads/images/featured/{{ equipment.featuredImage }}" alt="{{ equipment.slug }}" style="width:100%" /></center></td>
         			<td><center>{{ equipment.name }}</center></td>
         			<td><center>{{ equipment.durationBorrowMax }}</center></td>	
         			<td><center>{{ equipment.stock }}</center></td>	
@@ -37,8 +37,8 @@
                         });
                         
 						</script>
-						
-                		<button type="button" class="btn btn-success" onclick="window.location.href = '{{ path('borrow') }}';">Emprunter</button>
+
+                		<a type="button" href="{{ path('borrow', {'slug': equipment.slug }) }}" class="btn btn-success">Emprunter</a>
                 	</td>
           		</tr>
           	{% endfor %}

@@ -13,13 +13,13 @@ class EquipmentController extends AbstractController
     /**
      * @Route("/nos-equipement", name="equipment")
      */
-    public function index(EquipmentRepository $repository)
+    public function index(EquipmentRepository $equipments)
     {
-        dump($repository->findAll());
+        dump($equipments->findAll());
         
         return $this->render('equipment/index.html.twig', [
             'current_menu' => 'active_equipment',
-            'equipments' => $repository->findAll()
+            'equipments' => $equipments->findAll()
         ]);
     }
     

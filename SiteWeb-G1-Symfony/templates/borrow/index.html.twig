@@ -2,5 +2,17 @@
 {% block encoding %}<meta charset="UTF-8">{% endblock %}
 {% block title %}Emprunter - {% endblock %}
 {% block body %}
-	<h1>Page Emprunter</h1>
+	<h2><center>Emprunter nos équipments !</center></h2>
+	<div class="container">
+		<div class="row justify-content-around"> 
+			<div class="col-4">
+    			<h1>{{ equipment.name }}</h1>
+    			<img class="rounded" class="border border-primary" src="uploads/images/featured/{{ equipment.featuredImage }}" alt="{{ equipment.slug }}" style="width:100%" />
+        		<br>       		
+        	</div>	
+   			<div class="col-6">	
+				<p type="text/css">{{ equipment.description }}</p>
+      		</div>		
+      	</div>	
+    </div>
 {% endblock %}
