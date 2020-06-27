@@ -3,15 +3,23 @@
 {% block title %}Emprunter - {% endblock %}
 {% block body %}
 	<h2><center>Emprunter nos équipments !</center></h2>
+	<br>
+	<br>		
+	
 	<div class="container">
 		<div class="row justify-content-around"> 
-			<div class="col-4">
-    			<h1>{{ equipment.name }}</h1>
-    			<img class="rounded" class="border border-primary" src="uploads/images/featured/{{ equipment.featuredImage }}" alt="{{ equipment.slug }}" style="width:100%" />
-        		<br>       		
+			<div class="col-4" border-width:2px>
+    			<h1><small><center>{{ equipment.name }}</center></small></h1>
+    			{% if equipment.featuredImage is not null  %}
+        			<center><img src="{{ asset('uploads/images/featured/' ~ equipment.featuredImage) }}" alt="{{ equipment.slug }}" style="width:100%; height:auto" /></center>
+        		{% endif %}	
+            	<br>       		
         	</div>	
+        	<div class="col-md-1">  	
+        	</div>
    			<div class="col-6">	
 				<p type="text/css">{{ equipment.description }}</p>
+				
       		</div>		
       	</div>	
     </div>

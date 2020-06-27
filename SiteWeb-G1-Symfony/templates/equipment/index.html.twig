@@ -21,7 +21,7 @@
         <tbody>
         	{%  for equipment in equipments %}
         		<tr>
-        			<td><center><img src="uploads/images/featured/{{ equipment.featuredImage }}" alt="{{ equipment.slug }}" style="width:100%" /></center></td>
+        			<td><center><img src="{{ asset('uploads/images/featured/' ~ equipment.featuredImage) }}" alt="{{ equipment.slug }}" style="width:150px; height:150px" /></center></td>
         			<td><center>{{ equipment.name }}</center></td>
         			<td><center>{{ equipment.durationBorrowMax }}</center></td>	
         			<td><center>{{ equipment.stock }}</center></td>	
