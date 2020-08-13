@@ -24,7 +24,14 @@
         			<td><center><img src="{{ asset('uploads/images/featured/' ~ equipment.featuredImage) }}" alt="{{ equipment.slug }}" style="width:150px; height:150px" /></center></td>
         			<td><center>{{ equipment.name }}</center></td>
         			<td><center>{{ equipment.durationBorrowMax }}</center></td>	
-        			<td><center>{{ equipment.stock }}</center></td>	
+        			<td>
+        				<center>{% if equipment.stock > 0 %}
+   									{{ equipment.stock }}
+                                {% else %}
+   									Indisponible
+                                {% endif %}
+                    	</center>
+                    </td>	
                 	<td>            		
                 	 	<button type="button" class="btn btn-secondary" data-toggle="popover" data-trigger="focus" title="Description" tabindex="0" data-content="{{ equipment.description }}">Détails</button>
                 	 	
