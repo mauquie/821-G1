@@ -19,10 +19,10 @@ class BorrowType extends AbstractType
             $quantity = $quantity -1;
         }
         $builder
-            ->add('borrow_start')
             ->add('borrow_end')
             ->add('quantity',ChoiceType::class,[
-                'choices' => $choices
+                'choices' => $choices,
+                'data' => 1
             ])            
         ;                        
     }

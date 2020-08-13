@@ -22,8 +22,8 @@
                 		{% if app.user == borrow.user %}
                 			<tr>
                                 <td><center>{{ borrow.equipment }}</center></td>
-                                <td><center>{{ borrow.borrowStart | date("m/d/Y") }}</center></td>	
-                                <td><center>{{ borrow.borrowEnd | date("m/d/Y") }}</center></td>	
+                                <td><center>{{ borrow.borrowStart | date("d/m/Y  H:00") }}</center></td>	
+                                <td><center>{{ borrow.borrowEnd | date("d/m/Y  H:00") }}</center></td>	
                                 <td><center>{{ borrow.quantity }}</center></td>                      
                     		</tr>	
                         {% endif %}

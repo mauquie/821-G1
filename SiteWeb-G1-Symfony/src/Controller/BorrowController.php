@@ -14,6 +14,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
+use \DateTime;
 
 class BorrowController extends AbstractController
 {
@@ -26,6 +27,9 @@ class BorrowController extends AbstractController
     {
         
         $newBorrow = new Borrow();
+        $date = new DateTime(); 
+        $date = date_format($date, "d-m-Y H:00");
+        
         $returnedContent = array();
         $returnedContent['current_menu'] = 'active_equipment';
         
@@ -45,6 +49,8 @@ class BorrowController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
                 $newBorrow->setUser($user);
                 $newBorrow->setEquipment($equipment);
+                
+                $newBorrow->setBorrowStart(DateTime::createFromFormat("d-m-Y H:00",$date));
                 
                 $manager->persist($newBorrow);
                 $manager->flush();
