@@ -26,6 +26,8 @@ class BorrowController extends AbstractController
     {
         
         $newBorrow = new Borrow();
+        $returnedContent = array();
+        $returnedContent['current_menu'] = 'active_equipment';
         
         // On récupère l'utilisateur connecté
         $user = $this->getUser();  
@@ -33,25 +35,31 @@ class BorrowController extends AbstractController
         // On récupère l'équipement qui appartient au slug de la page emprunte
         $equipment = $equipments->findOneBy([ 'slug' => $slug ]);
         dump($equipment);
+        $returnedContent['equipment'] = $equipment;
         
-        
-        $form = $this->createForm(BorrowType::class,$newBorrow,['quantity'=> $equipment->getStock()]);              
-        $form->handleRequest($request);
-        
-        if ($form->isSubmitted() && $form->isValid()) {
-            $newBorrow->setUser($user);
-            $newBorrow->setEquipment($equipment);
+        if($equipment->getStock()>=1){
+            $form = $this->createForm(BorrowType::class,$newBorrow,['quantity'=> $equipment->getStock()]);              
+            $form->handleRequest($request);
+            $returnedContent['form']= $form->createView();
             
-            $manager->persist($newBorrow);
-            $manager->flush();
-            
-            return $this->redirectToRoute('my_borrowings');
+            if ($form->isSubmitted() && $form->isValid()) {
+                $newBorrow->setUser($user);
+                $newBorrow->setEquipment($equipment);
+                
+                $manager->persist($newBorrow);
+                $manager->flush();
+                
+                $equipment->setStock(($equipment->getStock()-$newBorrow->getQuantity())); // if we can AJAX response
+                $manager->persist($equipment); // if we can AJAX response
+                $manager->flush();// if we can AJAX response
+                
+                return $this->redirectToRoute('my_borrowings');
+            }
+        } 
+        else{
+            $returnedContent['form']= null;
         }
         
-        return $this->render('borrow/index.html.twig', [
-            'current_menu' => 'active_equipment',
-            'equipment' => $equipment,
-            'form' =>$form->createView()
-        ]);
+        return $this->render('borrow/index.html.twig', $returnedContent);
     }
 }

@@ -20,16 +20,23 @@
    			<div class="col-6">	
 				<p type="text/css">{{ equipment.description }}</p>
 				
-      		</div>		
-      		{{ form_start(form) }}
-
-            {{ form_row(form.borrow_start) }}
-            {{ form_row(form.borrow_end) }}
-            {{ form_row(form.quantity) }}
-        
-            <button type="submit" class="btn btn-success">s'inscrire</button>
-        
-            {{ form_end(form) }}
+      		</div>	
+      		{% if form is not null %}	
+          		{{ form_start(form) }}
+    
+                {{ form_row(form.borrow_start) }}
+                {{ form_row(form.borrow_end) }}
+                {{ form_row(form.quantity) }}
+            
+                <button type="submit" class="btn btn-success">s'inscrire</button>
+            
+                {{ form_end(form) }}
+                
+            {% else %}
+            	<div class="alert alert-danger" role="alert">
+            		<h3><center>Plus de stocks !</center></h3>
+            	</div>
+            {% endif %}
       	</div>	
     </div>
 {% endblock %}
