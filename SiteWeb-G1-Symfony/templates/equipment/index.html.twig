@@ -7,52 +7,48 @@
     	<h1>Page Equipement</h1>
       	<br>
     </div>
-    
-	<table id="equipments" class="table" data-toggle="table" data-search="true" data-pagination="true">
-        <thead>
-			<tr>
-                <th><center>Produit</center></th>
-                <th><center>Nom du produit</center></th>
-                <th data-sortable="true" data-field="Temps de disponibilité maximal de location"><center>Temps de disponibilité maximal de location</center></th>
-                <th data-sortable="true" data-field="Quantité disponible"><center>Quantité disponible</center></th>
-                <th><center>Caractéristiques</center></th>
-			</tr> 
-		</thead>
-        <tbody>
-        	{%  for equipment in equipments %}
-        		<tr>
-        			<td><center><img src="{{ asset('uploads/images/featured/' ~ equipment.featuredImage) }}" alt="{{ equipment.slug }}" style="width:150px; height:150px" /></center></td>
-        			<td><center>{{ equipment.name }}</center></td>
-        			<td><center>{{ equipment.durationBorrowMax }}</center></td>	
-        			<td>
-        				<center>{% if equipment.stock > 0 %}
-   									{{ equipment.stock }}
-                                {% else %}
-   									Indisponible
-                                {% endif %}
-                    	</center>
-                    </td>	
-                	<td>            		
-                	 	<button type="button" class="btn btn-secondary" data-toggle="popover" data-trigger="focus" title="Description" tabindex="0" data-content="{{ equipment.description }}">Détails</button>
-                	 	
-						<script>
-						$(document).ready(function(){
-							$('[data-toggle="popover"]').popover();
-                        });
-                        $('.popover-dismiss').popover({
-                              trigger: 'focus'
-                        });
-                        
-						</script>
-
-                		<a type="button" href="{{ path('borrow', {'slug': equipment.slug }) }}" class="btn btn-success">Emprunter</a>
-                	</td>
-          		</tr>
-          	{% endfor %}
-          	
-    	</tbody>
-	</table>
-
+    <div class="row">
+  		<div class="col-md-12">
+        	<table id="equipments" class="table" data-toggle="table" data-search="true" data-pagination="true">
+                <thead>
+        			<tr>
+                        <th><center>Produit</center></th>
+                        <th><center>Nom du produit</center></th>
+                        <th data-sortable="true" data-field="Temps de disponibilité maximal de location"><center>Temps de disponibilité maximal de location</center></th>
+                        <th data-sortable="true" data-field="Quantité disponible"><center>Quantité disponible</center></th>
+                        <th><center></center></th>
+        			</tr> 
+        		</thead>
+                <tbody>
+                	{%  for equipment in equipments %}
+                		<tr>
+                			<td>
+                				<center><img src="{{ asset('uploads/images/featured/' ~ equipment.featuredImage) }}" alt="{{ equipment.slug }}" style="width:150px; height:150px" /></center>
+                				<center><button type="button" class="btn btn-secondary" data-toggle="popover" data-trigger="focus" title="Description" tabindex="0" data-content="{{ equipment.description | raw('css') }}">Détails</button></center>
+        						<script>
+            						$(document).ready(function(){
+            							$('[data-toggle="popover"]').popover();
+                                    });
+                                    $('.popover-dismiss').popover({
+                                          trigger: 'focus'
+                                    });
+        						</script>
+                			</td>
+                			<td><center>{{ equipment.name }}</center></td>
+                			{% if equipment.stock > 0 %}
+                				<td><center>{{ equipment.durationBorrowMax }}</center></td>	
+                				<td><center>{{ equipment.stock }}</center></td>	
+                				<td><a type="button" href="{{ path('borrow', {'slug': equipment.slug }) }}" class="btn btn-success">Emprunter</a></td>
+                            {% else %}
+           						<td colspan="2"><center><img src="{{ asset('images/equipment/rupture-de-stock.png') }}" alt="rupture-de-stock" style="width:80%; height:auto" /></center></td>	
+           						<td><a type="button" href="{{ path('borrow', {'slug': equipment.slug }) }}" class="btn btn-danger">Indisponible</a></td>
+                            {% endif %}            
+                  		</tr>
+                  	{% endfor %}
+            	</tbody>
+        	</table>
+        </div>
+	</div>
     
     {# Popup HTML cachée
     

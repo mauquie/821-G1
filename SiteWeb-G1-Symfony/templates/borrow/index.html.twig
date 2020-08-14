@@ -18,7 +18,7 @@
         	<div class="col-md-1">  	
         	</div>
    			<div class="col-6">	
-				<p type="text/css">{{ equipment.description }}</p>
+				<p {{ equipment.description | raw('css') }}</p>
 				
       		</div>	
       		{% if form is not null %}	
