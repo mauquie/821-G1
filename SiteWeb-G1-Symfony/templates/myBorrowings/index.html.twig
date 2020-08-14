@@ -15,17 +15,42 @@
                         <th><center>Début emprunt</center></th>
                         <th><center>Fin emprunt</center></th>
                         <th data-sortable="true" data-field="Quantité"><center>Quantité</center></th>
+                        <th data-sortable="true" data-field="Remaining Time"><center>Temps restant</center></th>
         			</tr>
         		</thead>
        			<tbody>
        				{% for borrow in borrows %}
                 		{% if app.user == borrow.user %}
-                			<tr>
+                    		{% set difference = date(borrow.borrowEnd).diff(date(borrow.borrowStart)) %}
+                                    
+                            {% if borrow.borrowEnd | date() > borrow.borrowStart | date() %}
+                                {% set relative =  1%}
+                            {% else %}
+                                {% set relative =  -1%}
+                            {% endif %}   
+                                                         
+                            {% set diff = difference.days %}
+                            {% set diff = diff*relative %}
+                            
+							{% if diff>0 %}
+                				<tr>
+                			{% elseif diff==0 %}
+                				<tr class="alert alert-warning" role="warning">
+                			{% else %}
+                				<tr class="alert alert-danger" role="alert">
+                			{% endif %}
                                 <td><center>{{ borrow.equipment }}</center></td>
                                 <td><center>{{ borrow.borrowStart | date("d/m/Y  H:00") }}</center></td>	
                                 <td><center>{{ borrow.borrowEnd | date("d/m/Y  H:00") }}</center></td>	
-                                <td><center>{{ borrow.quantity }}</center></td>                      
-                    		</tr>	
+                                <td><center>{{ borrow.quantity }}</center></td>   
+                                
+                                <td><center>{{ diff }} jour(s)</center></td>                   
+                    		</tr>
+                    		
+                    		
+                    		
+                    		
+                    			
                         {% endif %}
                     {% endfor %}
             	</tbody>
