@@ -2,7 +2,7 @@
 {% block encoding %}<meta charset="UTF-8">{% endblock %}
 {% block title %}Nos Équipements - {% endblock %}
 {% block body %}
-		
+	<link href="{{ asset('css/popup.css') }}" type="text/css" rel="stylesheet">	
 	<div class="container">
     	<h1>Page Equipement</h1>
       	<br>
@@ -24,14 +24,18 @@
                 		<tr>
                 			<td>
                 				<center><img src="{{ asset('uploads/images/featured/' ~ equipment.featuredImage) }}" alt="{{ equipment.slug }}" style="width:150px; height:150px" /></center>
-                				<center><button type="button" class="btn btn-secondary" data-toggle="popover" data-trigger="focus" title="Description" tabindex="0" data-content="{{ equipment.description | raw('css') }}">Détails</button></center>
+            						
+        						<center>
+            						<div class="btn btn-secondary popup" onclick="myFunction()">Détails
+            							<span class="popuptext" id="myPopup"> {{ equipment.description | raw}}</span>
+            						</div>
+        						</center>
+
         						<script>
-            						$(document).ready(function(){
-            							$('[data-toggle="popover"]').popover();
-                                    });
-                                    $('.popover-dismiss').popover({
-                                          trigger: 'focus'
-                                    });
+        							function myFunction() {
+        							  var popup = document.getElementById("myPopup");
+        							  popup.classList.toggle("show");
+        							}
         						</script>
                 			</td>
                 			<td><center>{{ equipment.name }}</center></td>
