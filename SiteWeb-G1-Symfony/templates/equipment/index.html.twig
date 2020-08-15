@@ -20,24 +20,26 @@
         			</tr> 
         		</thead>
                 <tbody>
+                    {% set i=1 %}
                 	{%  for equipment in equipments %}
                 		<tr>
                 			<td>
                 				<center><img src="{{ asset('uploads/images/featured/' ~ equipment.featuredImage) }}" alt="{{ equipment.slug }}" style="width:150px; height:150px" /></center>
             						
         						<center>
-            						<div class="btn btn-secondary popup" onclick="myFunction()">Détails
-            							<span class="popuptext" id="myPopup"> {{ equipment.description | raw}}</span>
+            						<div class="btn btn-secondary popup" onclick="myFunction({{ i }})">Détails
+            							<span class="popuptext" id="myPopup{{ i }}"> {{ equipment.description | raw}}</span>
             						</div>
         						</center>
-
         						<script>
-        							function myFunction() {
-        							  var popup = document.getElementById("myPopup");
-        							  popup.classList.toggle("show");
-        							}
-        						</script>
-                			</td>
+                            		function myFunction(i) {
+                            			var array = ["myPopup",i.toString()];
+                            		  	var popup = document.getElementById(array.join(""));
+                            		  	popup.classList.toggle("show");
+                            		}
+                            	</script>
+								{% set i = i+1 %}
+                   			</td>
                 			<td><center>{{ equipment.name }}</center></td>
                 			{% if equipment.stock > 0 %}
                 				<td><center>{{ equipment.durationBorrowMax }}</center></td>	
