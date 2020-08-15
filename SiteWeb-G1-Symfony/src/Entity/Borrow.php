@@ -44,6 +44,9 @@ class Borrow
      */
     private $equipment;
     
+    
+    public $linker;
+    
     public function __toString()
     {
         return $this->id;
@@ -113,4 +116,10 @@ class Borrow
 
         return $this;
     }
+    
+    public function getLinker() :?string
+    {
+        return $this->linker;
+    }
+    
 }

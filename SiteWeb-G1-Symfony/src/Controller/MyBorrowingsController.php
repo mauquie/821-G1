@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-
+use \Datetime;
 
 class MyBorrowingsController extends AbstractController
 {
@@ -18,6 +18,7 @@ class MyBorrowingsController extends AbstractController
      */
     public function index(BorrowRepository $borrows)
     {
+        
         // On récupère l'utilisateur connecté
         $user = $this->getUser();
         // On récupère l'ID de l'utilisateur 
@@ -30,11 +31,14 @@ class MyBorrowingsController extends AbstractController
         
         // Affiche les informations liées à la BD récupérée dans une variable -- FACULTATIF
         dump($borrow);
+        $date = new DateTime();
+        $date = date_format($date, "d-m-Y H:00");
         
         return $this->render('myBorrowings/index.html.twig', [
             'current_menu' => 'active_borrow',
             'borrows' => $borrow,
-            'borrow' => $userBorrow
+            'borrow' => $userBorrow,
+            'now' => $date
         ]);
     }
 }

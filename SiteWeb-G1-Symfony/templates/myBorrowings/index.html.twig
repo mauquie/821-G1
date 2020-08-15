@@ -21,7 +21,7 @@
        			<tbody>
        				{% for borrow in borrows %}
                 		{% if app.user == borrow.user %}
-                    		{% set difference = date(borrow.borrowEnd).diff(date(borrow.borrowStart)) %}
+                    		{% set difference = date(borrow.borrowEnd).diff(date(now)) %}
                                     
                             {% if borrow.borrowEnd | date() > borrow.borrowStart | date() %}
                                 {% set relative =  1%}

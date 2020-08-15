@@ -42,13 +42,15 @@ class BorrowController extends AbstractController
         $returnedContent['equipment'] = $equipment;
         
         if($equipment->getStock()>=1){
-            $form = $this->createForm(BorrowType::class,$newBorrow,['quantity'=> $equipment->getStock()]);              
+            $form = $this->createForm(BorrowType::class,$newBorrow,['quantity'=> $equipment->getStock(),'locationTime'=>$equipment->getDurationBorrowMax()]);              
             $form->handleRequest($request);
             $returnedContent['form']= $form->createView();
             
             if ($form->isSubmitted() && $form->isValid()) {
                 $newBorrow->setUser($user);
                 $newBorrow->setEquipment($equipment);
+                
+                $newBorrow->setBorrowEnd(DateTime::createFromFormat("d-m-Y",$newBorrow->getLinker()));
                 
                 $newBorrow->setBorrowStart(DateTime::createFromFormat("d-m-Y H:00",$date));
                 

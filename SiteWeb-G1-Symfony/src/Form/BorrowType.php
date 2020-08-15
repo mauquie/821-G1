@@ -14,7 +14,7 @@ class BorrowType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $quantity = $options['quantity'];
-       
+        $locationTime = $options['locationTime'];
         $choices=[];
         while ($quantity > 0){
             $choices[strval($quantity)] = $quantity;
@@ -22,10 +22,20 @@ class BorrowType extends AbstractType
         }
         
         $date=new \DateTime("now");
-        $date = date_format($date, "d-m-Y H:00");
+        $date = date_format($date, "d-m-Y");
+        $newDate = date('d-m-Y',strtotime('+'.$locationTime.' days'));
+        $array = [];
+        $k = 1;
+        
+        while ($date <= $newDate){
+            $array[strval($date)] = $date;
+            $date = date('d-m-Y',strtotime('+'.$k.'days'));
+            $k = $k +1;
+        }
+        
         
         $builder
-            ->add('borrow_end',null,array('data'=>DateTime::createFromFormat("d-m-Y H:00",$date)))
+            ->add('linker',ChoiceType::class,['choices'=>$array,'label'=>"Fin d'emprunt"])
             ->add('quantity',ChoiceType::class,[
                 'choices' => $choices,
                 'data' => 1
@@ -36,6 +46,6 @@ class BorrowType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([ 'data_class' => Borrow::class ]);
-        $resolver->setRequired(['quantity']);
+        $resolver->setRequired(['quantity','locationTime']);
     }
 }
