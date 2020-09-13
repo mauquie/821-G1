@@ -16,6 +16,7 @@
                         <th><center>Fin emprunt</center></th>
                         <th data-sortable="true" data-field="Quantité"><center>Quantité</center></th>
                         <th data-sortable="true" data-field="Remaining Time"><center>Temps restant</center></th>
+                        <th data-sortable="true" data-field="Actions"><center>Actions</center></th>
         			</tr>
         		</thead>
        			<tbody>
@@ -44,7 +45,9 @@
                                 <td><center>{{ borrow.borrowEnd | date("d/m/Y  H:00") }}</center></td>	
                                 <td><center>{{ borrow.quantity }}</center></td>   
                                 
-                                <td><center>{{ diff }} jour(s)</center></td>                   
+                                <td><center>{{ diff }} jour(s)</center></td> 
+                                <td><center><td><a type="button" href="{{ path('return', {'id': borrow.id }) }}" class="btn btn-warning">Rendre le matériel</a></td></center></td>                   
+                    		
                     		</tr>
                     		
                     		

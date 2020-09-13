@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% block encoding %}<meta charset="UTF-8">{% endblock %}
+{% block title %}Rendre - {% endblock %}
+{% block body %}
+	<h2><center>Rendre nos équipments !</center></h2>
+	<br>
+	<br>		
+	
+	<p><em>{{ limitTime }}</em></p>
+	
+	<div class="container">
+		<div class="row justify-content-around"> 
+      		{% if form is not null %}	
+          		{{ form_start(form) }}
+          		
+          		
+                {{ form_row(form.quantity) }}
+            
+                <button type="submit" class="btn btn-warning">RENDRE</button>
+            
+                {{ form_end(form) }}
+                
+            {% else %}
+            	<div class="alert alert-danger" role="alert">
+            		<h3><center>Plus de stocks !</center></h3>
+            	</div>
+            {% endif %}
+      	</div>	
+    </div>
+    
+    <script>
+
+        
+    
+    </script>
+    
+    
+    
+{% endblock %}

@@ -38,4 +38,24 @@
             {% endif %}
       	</div>	
     </div>
+    
+    <script>
+
+    $("#change").click(function(){
+        
+        $.ajax({
+
+        	url: '/send_data',
+        	datatype: 'html',
+        	data: { {{ equipment.durationborrowmax }} : {{equipment.stock}} * {{ equipment.durationborrowmax }}}
+
+        });
+       
+    });
+        
+    
+    </script>
+    
+    
+    
 {% endblock %}
